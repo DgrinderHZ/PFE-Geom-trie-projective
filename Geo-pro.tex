@@ -1,0 +1,310 @@
+\documentclass[12pt]{report}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[Glenn]{fncychap} %%%% encadrer les chapitres
+\usepackage{lmodern} %%% style d'ilyass  flktaba
+\usepackage{xcolor}
+\usepackage{amsthm} 
+\usepackage{amsmath}
+\usepackage{amssymb} 
+\usepackage{verbatim}
+\usepackage{multicol}
+\usepackage{arabtex}
+\usepackage{longtable}
+\usepackage{graphicx} %%% pour inserer les images
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{tikz,tkz-tab}
+\usepackage[hmargin=3cm,vmargin=2cm]{geometry} %% pour preciser les marges 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newtheorem{lemme}{Lemme}[section]
+\newtheorem{corollaire}{Corollaire}[section]
+\newtheorem{theo}{Théorème}[section]
+\newtheorem{madef}{Définition}[section]
+\newtheorem{rmq}{Remarque}[section]
+\newtheorem{propriété}{Propriétés}[section]
+\newtheorem{propo}{Proposition}[section]
+\newtheorem{propos}{Propositions}[section]
+\newtheorem{exemple}{Exemple}[section]
+
+%%%%%%%%%%%%%%%%%%%%%%% les commandes pour encadrer les chapitres   %%%%%%%%%%%%%%%
+\ChNameVar{\fontsize{14}{16}\usefont{OT1}{phv}{m}{n}\bfseries}
+\ChNumVar{\fontsize{60}{62}\selectfont\color{darkgray}}
+\ChTitleVar{\Huge\bfseries}
+\def\N{\mathbb N}
+\begin{document}
+\chapter*{introduction}
+La géométrie projective peut être vue comme une complétion de la géométrie affine.
+L'idée est ici de modéliser les notions de perspectives et horizon. Cette branche très
+ancienne des mathématiques est reliée aux problèmes de représentations graphiques
+(et donc ` a des problèmes informatiques !) et elle permet de simplifier des théorèmes
+importants de géométrie.
+\chapter{les base de la géométrie projectif}
+Dans ce chapitre on va faire un rappelle sur les espaces affines, et introduire par suite les espaces projectifs qui sont à la base de la géométrie projective.    
+\section{Rappelle sur les espace affine}
+\subsubsection{Rappelle d'algèbre}
+\begin{madef}(Groupe)
+On appelle groupe tout ensemble non-vide $G$ muni d'une loi de composition interne $*$ vérifiant les trois propriétés suivantes:
+\begin{enumerate}
+\item[1] La loi $*$ est associative dans $G$:
+c-à-d que $x*(y*z)=(x*y)*z$ pour tout $x,y,z\in G$ 
+\item[2]  la loi $*$ admet un element neutre dans $G$ :
+  c-à-d qu'il existe $c\in G$ tel que $x*e=e*x=x$ pour tout $x\in G$
+\item[3] Tout éléments de $G$ admet un symétrique dans $G$ pour la loi $*$ :
+c-à-d que pour tout $x\in G$, il existe $x'$ tel que $x*x'=x'*x=e$    
+\end{enumerate}
+\end{madef}
+\begin{madef}(Sous-groupe)
+soit$G$ un groupe muni de la loi de composition interne $*$ et sois $H$ un sous ensemble non-vide de $G$. On dit que H est un sous-groupe de $G$ si ils  les conditions suivante:
+\begin{enumerate}
+\item[(i)] H est stable par la loi $*$ (c-à-d que $x*y \in H$ pour tout $x,y\in H$)
+\item[(ii)] H est stable par passage a l'inverse (c-à-d que $x^-2 \in H$ pour tout $ x\in H$ %j'ai trouvais un probleme avec la puissance %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%V %    %%%%% % %  % %%ù% %% % %% %% %% 
+\end{enumerate}
+\end{madef}
+\begin{rmq} 
+\begin{enumerate}
+\item[1.] pour montrer que H est un groupe $(H \subset G )$ il suffit de montrer que $H$ est un sous groupe de $G$.
+\item[2.] Le groupe G est dit abélien ou bien commutatif si: $\forall x,y\in G x*y=y*x$.
+\end{enumerate}
+\end{rmq}
+\begin{madef}
+Soit $G$ un groupe muni d'une loi de composition interne $*$ est $G'$ un groupe muni d'une loi de composition interne $*$ . On appelle morphisme de groupe, ou homomorphisme de groupe de $G$ dans $G'$ toute application $f: G\
+rightarrow G'$ telle que : $f(x*y)=f(x)*f(y)$
+\end{madef}
+\begin{madef}
+soit $A$ un ensemble muni de deux loi de composition internes $+$ et $*$ on dit que $(A,+,*)$ est un anneau si et seulement si:
+\begin{enumerate}
+\item[1.] $(A,+)$ est un groupe abélien.
+\item[2.] $*$ est associative.
+\item[3.] $*$ est distributive par rapport à $+$, c'est-à-dire $\forall x,y,z\in A: x*(y+z)=x*y+x*z$ et $(x+y)*z=x*z+y*z$.
+si de plus $*$ est commutative on dit que $(A,+,*)$ est un anneau commutatif.      
+\end{enumerate}
+\end{madef}        
+\begin{exemple} $(\mathbb{Z},+,.)$ et $(\mathbb{Q,+,.})$ sont des anneau commutatif.
+\end{exemple}
+\begin{madef} Soit $K$ un ensemble muni de deux loi de composition interne $+$ et $*$. \\
+On dit que $(K,+,*)$ est un corps si et seulement si:
+\begin{enumerate}
+\item[i)] $(K,+,*)$ est un anneau unitaire.[$(K,+,*)$ est unitaire si la loi $*$ admet un element neutre ].
+\item[ii)] Toute élément non nul de $K$ est inversible dans $K$, c-à-d $\forall k\in K-{0} \exists k'$ tel que $k*k'=k'*k=1$.   
+Si la loi $*$ est commutatif, on dit que le corps $K$ est commutatif.
+%%j'ai un probleme avec k-0%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % % % % %%  
+\end{enumerate}
+\end{madef}  
+\begin{exemple} $(\mathbb{R},+,.)$ et $(\mathbb{Q},+,.)$ sont des corps commutatif. 
+     Soit E un ensemble muni d'une loi interne $+$ est d'une loi externe. à un corps commutatif $(\mathbb{K,+,*})$.
+\end{exemple}
+\begin{madef} On dit que $(\mathbb{E,+,*})$ est un espace vectoriel sur $\mathbb{K}$ ou encore $(\mathbb{E,+,*})$ est  $\mathbb{K}-espace$ vectorielle si:
+\begin{enumerate}
+\item[1.] (E,+) est un groupe abélien.
+\item[2.] la loi externe . vérifie les propriétés suivant :
+  \item[i)]   $\forall \alpha ,\beta \in \mathbb{K}$,$\forall\,x\,\in E :$ $(\alpha+\beta).x=\alpha\,.\,x+\beta\, .\, x$;  
+  \item[ii)]  $\forall \alpha ,\beta \in \mathbb{K}$,$\forall\,x\,\in E :$  $(\alpha+\beta).x=\alpha\,.\,(\beta\,.\,x)$;
+  \item[iii)] $\forall \alpha \, \in \mathbb{K}, \forall x,y\in E : \alpha\,.\,(x\,+\,y)=(\alpha\,.\,x)\,+\,(\alpha\,.\,y)$;
+  \item[iv]   $\forall x \in \,E: 1.x=x$;
+    
+\end{enumerate}
+\end{madef}     
+\begin{propos}  Soit $(E,+,.)$ un $\mathbb{K}-espace$ vectoriel et $H$ sous-ensemble de $E$.On dit que $H$ est un sous-espace vectoriel de $E$ si et seulement si :
+\begin{enumerate}
+\item[1.] $H\neq\emptyset $.
+\item[2.] $\forall x,y \in H, \forall \lambda \in \mathbb{K}:x+\lambda\,.\,y\in H$; 
+\end{enumerate}  
+\end{propos}
+\subsection{Espace affine et sous-espace affine}
+\begin{madef} Soit $E$ un ensemble non vide.
+On dit que $E$ est un espace $affine$ sur $\mathbb{R}-espace vectoriel \vec{E}$ lorsqu'il existe une loi de composition externe $+:\vec{E}\times\vec{E}\longrightarrow E$ qui vérifie :
+\begin{enumerate}
+\item[1.] $M\,+\,\vec{0}\,=\,M$ pour tout $M \in E$;
+\item[2.] $M+(\vec{u}+\vec{v})=(M+\vec{u})+\vec{v}$ pour tout$\vec{u},\vec{v}\in\vec{E}$ et tout $M\in E$; 
+\item[3.] $\forall M \in E$,l'application $\varphi_{M}:\vec{E}\longrightarrow E$ qui associe à $\vec{u}\longrightarrow M\,+\,\vec{u}$ est une bijection. 
+\end{enumerate}
+\end{madef}
+\textbf{Notation}  lorsque $\vec{u}$ est l'unique vecteur tel que $B=A+\vec{u}$, on notera $\vec{u}=\vec{MN}=N-M$, c-à-d que $N$ est le translaté de point $M$ par $\vec{u} $  
+\begin{propriété}
+\begin{enumerate}
+ \item[i]   Pour tout $M,N,L\in E$ on a ( relation de Chasles ) $\vec{ML}+\vec{LN}=\vec{MN}$   
+  \item[ii] Pour tout $M \in E$,on a $\vec{MM}=0=M-M$;
+ \item[iii] Pour tout  $M,N \in E$,on a $\vec{MN}=-\vec{NM}$ (trivialement $N-M=-(M-N)$);
+\item[iv]Pour tout $M,N,L \in E,$on a $\vec{MN}-\vec{ML}=\vec{LN}$\\
+      (trivialement $(N-M)-(L-M)=(N-L)$);
+\end{enumerate}
+\end{propriété}
+\subsection{Barycentre}
+on se situe toujours dans l'espace affine $(E,\vec{E},+)$.Soit $a_{1},,,,,a_{p}$ des point de $E$ avec($p\geq2$),$\alpha_{1}     ,,,,\alpha_{p}\in \mathbb{K},$ et $b\in E$ on pose : $\alpha=\alpha_{1}+ + + +\alpha_{p}$.On appelle point $x$ de $E$ du coefficient $\alpha$ ou point pondéré tout élément $(x,\alpha)$ de produit cartésien $E\times\mathbb{K}$.
+\begin{theo}   Soit {($a_{i},\alpha_{i})/i=1,,,,p$} une famille finie de $p$ points pondérés de  $E\times\mathbb{K}$ telle que la somme $\sum_{i=1}^p \alpha_{i}\neq 0$.alors il existe un unique point de$E$ tel que $\sum_{i=1}^p \alpha_{i}\vec{ba_{i}}=0$. Ce point est le barycentre de système de point pondérés et noté $b=bary{(a_{i},\alpha_{i}) /i=1,,,,p}$.  
+\end{theo}
+\subsection{Sous espace affine}
+Soit $E$un espace affine d'espace vectoriel associe $\vec{E}$. Une partie non vide $X$ de $E$ est un sous-espace affine de $E$ s'il existe un sous-espace vectoriel $\vec{X}$ de $\vec{E}$ et s'il existe $a\in E$, tel que $X=a+\vec{X}$.
+\begin{propos} 
+Soit E un espace affine d'espace vectoriel associe $\vec{E}$,si $X=a+\vec{X}$ est un sous espace affine de $E$,alors $b\in X\Leftrightarrow X=b+\vec{X}$.
+\end{propos}
+\begin{rmq} Un sous espace affine est défini à partir d'un point et d'un sous-espace vectoriel, on a $X=a+\vec{X}.$ 
+\end{rmq}    
+\subsection{Les application affine} 
+En géométrie une application affine est une application entre deux espace affine qui est compatible avec leur structure,dans ce partie on va voir la définition des application affine,des exemple d'application affine est leur propriétés 
+\begin{madef}
+Soit $E$ et $E'$ deux espace affine d'espace vectoriels associés $\longrightarrow E$ et $\longrightarrow E'$
+une application $f$ de $E$ et $E'$ est dite affine lorsqu'elle existe une application linéaire $\vec{f}:\vec{E} \longrightarrow  \vec{E'}$, un point $O$ de $E$ est un point $O'$ de $E'$ tel que:
+$\forall M \in E \vec{f}(\overrightarrow{OM})=\overrightarrow{O'f(M)}$
+\end{madef}
+\begin{propos}
+Si $(E,\overrightarrow{E})$ et $(E',\overrightarrow{E'})$ sont deux affine et $\overrightarrow{E},\overrightarrow{E'}$ sont des $\mathbb{K}-espace$ vectorielle associés on dit qu'une application est affine si et seulement si elle conserve le barycentre.
+\end{propos}
+\begin{propos} Toute application constante est affine dont sa partie linéaire est l'application nulle %%page 15 fin
+\end{propos}
+\section{Espace projectif}
+Dans ce chapitre on utilise le cas où $\mathbb{K}=\mathbb{R}$
+\subsection{Construction vectorielle} 
+\subsubsection{construction vectorielle}
+soit $E$ un espace vectorielle de dimension $n+1$ sur le corps $\mathbb{R}$
+on definit sur $E\backslash\{0\}$ la relation $x\mathcal{R} y$ si et seulement si il existe un scalaire $\lambda \neq 0$ tel que $y=\lambda x$ \\
+cette relation est une relation  d'équivalence c-à-d que pour tout $x,y$ et tout $z$ on a :\\
+$$x\mathcal{R} x$$
+$$x\mathcal{R} y\Rightarrow y\mathcal{R} x$$
+$$(x\mathcal{R} y \;et\; y\mathcal{R} z) \Rightarrow x\mathcal{R} z$$
+Les classes d'équivalence sont donc les $\textbf{Direction}$ de $E$.\\
+L'ensemble des classes d'équivalence est appelé $\textbf{espace projectif}$ de dimension $n$ construit à partir de $E$,
+et sera noté $P(E)$.C'est donc l'ensemble des directions,ou si on veut aussi l'ensemble des droites vectorielle de $E$.
+\begin{madef}
+On appelle projectivé de l'espace vectoriel $E$ l'ensemble $P(E)$ de ses droites vectorielles. Toute projectivé d'un $\mathbb{K}$-espace vectoriel est un espace projective (sur $\mathbb{K}$).\\
+La dimension de $P(E)$ est par définition
+$$dim\,P(E)=dim\,E-1$$
+\end{madef}
+On appelle droite projective (resp. plan projectif) un espace projectif de dimension 1 (resp. 2)
+\begin{rmq}
+ si $dim\,E=0$ c-à-d $dim\,P(E)=-1$ $\Rightarrow P(E)= \emptyset$    
+ $dim\,E=1$ c-à-d $dim\,P(E)=0$ alors $P(E)$ est réduit à un point.
+\end{rmq}
+Pour l'instant, notre définition d'un espace projectif en fait un 
+simple ensemble ; le fait d'appeler « points » ses éléments ne suffît 
+pas à en faire un objet géométrique. Il lui manque une structure 
+géométrique, c'est-à-dire un ensemble de propriétés sur ses points 
+qui soient de nature géométrique. La plus simple est sans doute 
+la notion d'alignement : quand peut-on dire que des points de 
+P(E) sont alignés? Quand ils appartiennent à une même droite, 
+évidemment. La prochaine notion à définir est donc celle de sous- 
+espace projectif. \\
+\section{Sous espace projectifs} 
+
+Comme un espace projectif est défini à partir d'un espace vectoriel, 
+on va se servir de la notion de sous-espace vectoriel. Si F est un 
+sous-espace vectoriel E, alors son projectivé P(F) est une partie 
+de P(E) : toute droite de F est également une droite de E. \\
+\\
+Soit $\pi$ l'application de $E\backslash\{0\}$ ($E$ e.v de dim n+1) sur $P(E)$ qui à un vecteurs non nulle fait correspondre sa classe. Si $F$ est un sous espace de $E$ de dimension $1\leqslant k \leqslant n+1 $   alors on vérifie immédiatement que $\pi(F\backslash\{0\})$ n'est rien d'autre que le sous-espace projective $P(F)$. Ceci 
+permet d'introduire la définition suivante.\\ 
+
+% Ce sera par definition le $\textbf{sous-espace projectif}$ de $P(E)$ associé au sous-espace vectoriel $F$. Sa dimension est $k-1$.Si $F$ de dimension 1 (c-à-d $F$ est une droite vectorielle) alors le sous-espace projectif associé est un $\textbf{point}$ ,si $F$ est de dimension $n$ alors le sous-espace projectif associé est de dimension $n-1$ ,on dit alors que c'est un $\textbf{hyperplan projectif}$.\\ %
+\begin{madef}
+  Une partie $A$ de $P(E)$ en est un sous-espace 
+ projectif (ou simplement sous-espace) si elle s'écrit $A = P(F)$ pour 
+ un certain sous-espace vectoriel $F$ de $E$. 
+ En particulier, une droite projectivé (ou simplement droite) de 
+ $P(E)$ est un sous-espace projectif de dimension 1, c'est-à-dire le 
+ projectivé d'un plan vectoriel de $E$. 
+ On dit que des points $x_{1},... ,x_{k}$ de $P(E)$ sont alignés s'il existe 
+ une droite qui les contient tous. 
+\end{madef}
+Ainsi, trois points de P(E) sont alignés si, et seulement si, en tant 
+que droites de E, ils sont coplanaires (figure 1). 
+Remarquons que si A est un sous-espace projectif de P(E), il existe 
+un unique sous-espace vectoriel F tel que P(F) = A. 
+Notons également que la dimension d'un sous-espace est au plus 
+égale à la dimension de l'espace considéré.\\
+\begin{propos}
+Une intersection de sous-espaces projectifs 
+est un sous-espace projectif. De plus, si $A$ et $B$ sont deux sous- 
+espaces d'un espace projectif $P(E)$, on a : 
+	$$ dim(A\cap B) \geq dim(A) + dim(B) - dim(P(E)) $$
+\end{propos}
+\textbf{Démonstration:} \\
+Soit $(A_{i})$ une famille de sous-espaces projectifs 
+de $P(E)$. Pour tout indice i, soit $F_{i}$ le sous-espace vectoriel de $E$ 
+tel que $A_{i} = P(F_{i})$. Un point de $P(E)$ appartient à l'intersection 
+$\bigcap A_{i}$ si, et seulement si, il s'écrit $\langle v \rangle$ ( où $\langle v \rangle =\{ \lambda v \  | \   \lambda \in \mathbb{R} \} $ est la droite vectorielle engendrée par le vectuer $v$ ) avec $v \in \bigcap F_{i}$, autrement 
+dit, $\bigcap A_{i} = P(\bigcap F_{i})$. Comme une intersection de sous-espaces  
+vectoriels est un sous-espace vectoriel, $\bigcap A_{i}$ est bien un sous-espace 
+projectif de $P(E)$. \\
+Démontrons la seconde partie. Par définition, il existe des sous- 
+espaces vectoriels $F$ et $G$ de $E$ tels que $A = P(F)$ et $B = P(G)$. 
+On sait que 
+$$ dim(F) + dim(G) - dim(F \cap G) = dim(F + G) \leq dim(E) $$
+ce qui entraîne par définition de la dimension d'un sous-espace 
+projectif : 
+$$ dim (A) + 1 + dim(B) + 1 - dim(A \cap B)- 1\leq dimP(E) + 1$$
+qui s'écrit encore : 
+$$dim(A \cap B) \geq dim(A) + dim(B) - dim(P(E))$$. 
+
+\begin{propos}
+	On considère dans un espace projectif $P(E)$ 
+	deux sous-espaces $A, B$. Si $A \subset B$ et si $A$ et $B$ ont même  
+	dimension, alors $A = B$.
+\end{propos}
+\textbf{Démonstration:}\\
+Cette propriété découle directement de son  
+analogue vectoriel. Soient $F$ et $G$ les sous-espaces vectoriels de $E$ 
+tels que $A = P(F)$ et $B = P(G)$. Toute droite de $F$ est incluse 
+dans $G$ par hypothèse, donc $F \subset G$. Mais, $dim (A) = dim(B)$
+entraîne  $dim(F) = dim(G)$, donc $F = G$. 
+\begin{corollaire}
+	Soient $A, B \subset  P(E)$ deux droites distinctes 
+	d'un plan projectif. Alors, $A$ et $B$ s'intersectent en exactement un 
+	point. 
+\end{corollaire}
+\textbf{Démonstration:}\\
+D'après la proposition 1.3.1, $A \cap B$ est un sous- 
+espace de $P(E)$ et l'on a $dim(A \cap B) \geq 1 + 1-2 = 0$. En particulier, 
+$A \cap B$ n'est pas vide (sinon il serait de dimension —1). 
+De plus, comme $A \cap B \subset A$, si $dim(A \cap B)$ valait 1, on aurait en 
+vertu de la proposition 1.3.2 : $A \cap B = A$. Il s'ensuivrait $A \subset B$ 
+et donc $A = B$, cas exclu par hypothèse. \\
+On en déduit que $A \cap B$ est de dimension 0, donc est réduit à un 
+point de $P(E)$. \\
+(Images/ figure)
+\\
+Le fait que l'intersection de sous-espaces soit encore un sous-espace 
+permet, comme en géométrie affine ou en algèbre linéaire, de  
+définir la notion de sous-espace engendré par une partie. 
+\begin{madef}
+	Soit $P(E)$ un espace projectif et $S \subset P(E)$. 
+	On appelle sous-espace (projectif) engendré par $S$ le plus petit 
+	sous-espace de $P(E)$ qui contient $S$, c'est-à-dire 
+	\textbf{proj}($S$) $= \bigcap \{ A\ |\ A$ sous-espace de $P(E)$ tel que $A \supset S$\} 
+\end{madef}
+\subsection{Coordonnées homogènes et repère projective}
+Nous allons définir sur un espace projective un système de \textbf{cordonnées homogènes} par le procéssus suivant. Puisque nous avons construit un espace projectif à partir d'un espace vectoriel, nous allons choisir une base de cet espace vectoriel et regarder comment nous pouvons repérer les points de l'espace projectif.\\
+%Soit donc $(e_{1},e_{2},...,e_{n+1})$ une base de $E$ ($E$ e.v de dim n+1). Soit $x$ un vecteur non nul de $E$, ses coordonnées sont $(x_{1},...,x_{n+1})$ avec $x_{i}\neq 0 , i=1,...,n+1 .\\
+%Le point correspondant $M$ de l'espace projectif est la classe des points dont les coordonnées sont de la forme 
+%$(\lambda x_{1},...,\lambda x_{n+1})$ où $\lambda \neq 0$. On peut donc, de la même façon que pour les vecteurs, définir une relation d'équivalence sur les (n+1)-uplets de coordonnées. On notera $(x_{1} : x_{2} :...: x_{n+1})$ la classe de $(x_{1},...,x_{n+1})$ et on dira que ce sont les \textbf{coordonnées homogènees} ou encore les \textbf{coordonnées projectives} du point $M$. Ainsi par exemple $(1 : 0 : 1) = (2 : 0 : 2)$ représentent le même point. Remarquons que $(0 : 0 : 0)$ n'existe pas. Le qualificatif \textbf{"homogène"} fait référence à l'égalité suivante:
+ %$$(\lambda x_{1} :...: \lambda x_{n+1}) = (x_{1} : x_{2} :...: x_{n+1})$$%
+ \\
+ 
+ \begin{madef} (\textbf{Repère projectif})\\
+   Dans l’espace projectif $\textbf{P(E)}$ de dimension n, nous dirons que 
+   n + 2 points $M_0,. . . ,M_{n+1}$ forment un repère projectif de $\textbf{P(E)}$ s'il existe une base 
+   $(e_{0}, . . . , e_{n})$ de $E$ qui vérifie les conditions :
+    \begin{enumerate}
+    	\item   Les droites vectorielles $M_0,. . . ,M_{n+1}$ sont engendrées par $(e_0, . . . , e_{n})$  ;
+    	\item   la droite vectorielle $M_{n+1}$ est engendrée par $e_0 + . . . + e_{n}$.
+    \end{enumerate} 
+  \textbf{Remarques:} \\
+    - Dans une droite projective, trois points forment un repère projectif si et seulement 
+  si ils sont distincts. \\
+    - Dans un plan projectif, quatre points forment un repère projectif s’ils sont distincts 
+  et si trois quelconques d’entre eux ne sont pas alignés. Un tel repère projectif 
+  s'appelle un quudrangle. 
+  
+ \end{madef}
+\section{Les cartes affine}
+Nous allons maintenant montrer qu’une droite projective est une droite afﬁne « avec un point à l’inﬁni » et qu’un plan projectif est un plan afﬁne « avec une droite de points à l’inﬁni ». 
+
+
+\end{document}
